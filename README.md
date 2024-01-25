@@ -14,7 +14,7 @@ Este projeto é um sistema de CRM desenvolvido em Laravel para o gerenciamento d
 - MySQL (Persistência de Dados)
 
 ## Instruções de Configuração
-1. Clone o repositório: `git clone https://seu-repositorio.git`
+1. Clone o repositório: `git clone https://github.com/chnds/Lead-Management-System.git`
 2. Instale as dependências: `composer install`
 3. Configure o ambiente: Copie o arquivo `.env.example` para `.env` e configure o banco de dados e outras variáveis de ambiente.
 4. Execute as migrações: `php artisan migrate`
