@@ -68,5 +68,3 @@ Para executar os testes unitários do Laravel, utilize o seguinte comando:
 ```bash
 php artisan test
 
-## Contato
-Para mais informações, entre em contato em [csouzatech@gmail.com](mailto:csouzatech@gmail.com).
