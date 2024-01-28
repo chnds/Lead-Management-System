@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware(['web'])->group(function () {
+    Route::resource('leads', 'LeadController');
+    Route::get('/home', 'HomeController@index')->name('home');
+});
 
-Route::resource('leads', 'LeadController');
