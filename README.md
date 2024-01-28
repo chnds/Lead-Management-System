@@ -97,7 +97,8 @@ Copy code
 Método: DELETE
 URL: http://localhost:8000/api/leads/{id}
 Cabeçalho: Authorization: Bearer <seu_token_de_autenticacao>
-Certifique-se de substituir http://localhost:8000 pela URL do seu ambiente local. Essas rotas requerem autenticação de usuário por meio da rota /api/login, que retorna um token de autenticação necessário para todas as demais solicitações. Certifique-se de incluir este token no cabeçalho Authorization no formato Bearer <seu_token_de_autenticacao> em todas as requisições posteriores.
+Certifique-se de substituir http://localhost:8000 pela URL do seu ambiente local. 
+Essas rotas requerem autenticação de usuário por meio da rota /api/login, que retorna um token de autenticação necessário para todas as demais solicitações. Certifique-se de incluir este token no cabeçalho Authorization no formato Bearer <seu_token_de_autenticacao> em todas as requisições posteriores.
 
 ## Testes Unitários
 
