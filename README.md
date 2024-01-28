@@ -21,27 +21,80 @@ Este projeto é um sistema de CRM desenvolvido em Laravel para o gerenciamento d
 5. Inicie o servidor: `php artisan serve`
 
 ## Como Testar a API
-Após configurar e iniciar o servidor, você pode testar a API usando ferramentas como [Postman](https://www.postman.com/) ou [Insomnia](https://insomnia.rest/). Aqui estão alguns pontos de entrada da API:
+Após configurar e iniciar o servidor, você pode testar a API utilizando ferramentas como Postman ou Insomnia. Aqui estão alguns pontos de entrada da API:
 
-- **Listar Leads:**
-  - Método: GET
-  - URL: `http://localhost:8000/api/leads`
+**Autenticação de Usuário:**
 
-- **Adicionar Lead:**
-  - Método: POST
-  - URL: `http://localhost:8000/api/leads`
-  - Corpo: JSON com os detalhes do lead
+Método: POST
 
-- **Editar Lead:**
-  - Método: PUT
-  - URL: `http://localhost:8000/api/leads/{id}`
-  - Corpo: JSON com os detalhes atualizados do lead
+URL: http://localhost:8000/api/login
 
-- **Excluir Lead:**
-  - Método: DELETE
-  - URL: `http://localhost:8000/api/leads/{id}`
+Corpo: JSON com email e senha do usuário
 
-Certifique-se de substituir `http://localhost:8000` pela URL do seu ambiente local.
+Exemplo de corpo da solicitação:
+
+json
+Copy code
+{
+    "email": "seu_email@example.com",
+    "password": "sua_senha"
+}
+Exemplo de resposta bem-sucedida:
+
+json
+Copy code
+{
+    "token": "seu_token_de_autenticacao"
+}
+Este token será necessário para autenticar as demais solicitações.
+
+**Listar Leads:**
+
+Método: GET
+URL: http://localhost:8000/api/leads
+Cabeçalho: Authorization: Bearer <seu_token_de_autenticacao>
+Adicionar Lead:
+
+Método: POST
+
+URL: http://localhost:8000/api/leads
+
+Cabeçalho: Authorization: Bearer <seu_token_de_autenticacao>
+
+Corpo: JSON com os detalhes do lead
+
+Exemplo de corpo da solicitação:
+
+json
+Copy code
+{
+    "nome": "Nome do Lead",
+    "email": "lead@example.com"
+}
+**Editar Lead:**
+
+Método: PUT
+
+URL: http://localhost:8000/api/leads/{id}
+
+Cabeçalho: Authorization: Bearer <seu_token_de_autenticacao>
+
+Corpo: JSON com os detalhes atualizados do lead
+
+Exemplo de corpo da solicitação:
+
+json
+Copy code
+{
+    "nome": "Novo Nome do Lead",
+    "email": "novo_lead@example.com"
+}
+**Excluir Lead:**
+
+Método: DELETE
+URL: http://localhost:8000/api/leads/{id}
+Cabeçalho: Authorization: Bearer <seu_token_de_autenticacao>
+Certifique-se de substituir http://localhost:8000 pela URL do seu ambiente local. Essas rotas requerem autenticação de usuário por meio da rota /api/login, que retorna um token de autenticação necessário para todas as demais solicitações. Certifique-se de incluir este token no cabeçalho Authorization no formato Bearer <seu_token_de_autenticacao> em todas as requisições posteriores.
 
 ## Testes Unitários
 
