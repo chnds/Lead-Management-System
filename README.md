@@ -53,7 +53,8 @@ Este token será necessário para autenticar as demais solicitações.
 Método: GET
 URL: http://localhost:8000/api/leads
 Cabeçalho: Authorization: Bearer <seu_token_de_autenticacao>
-Adicionar Lead:
+
+**Adicionar Lead:**
 
 Método: POST
 
@@ -71,6 +72,7 @@ Copy code
     "nome": "Nome do Lead",
     "email": "lead@example.com"
 }
+
 **Editar Lead:**
 
 Método: PUT
@@ -89,6 +91,7 @@ Copy code
     "nome": "Novo Nome do Lead",
     "email": "novo_lead@example.com"
 }
+
 **Excluir Lead:**
 
 Método: DELETE
