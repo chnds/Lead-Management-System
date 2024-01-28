@@ -1,61 +1,127 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Sistema de Gerenciamento de Leads
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Visão Geral do Projeto
+Este projeto é um sistema de CRM desenvolvido em Laravel para o gerenciamento de leads.
 
-## About Laravel
+## Funcionalidades Principais
+- Autenticação de usuário
+- Listagem, adição, edição e exclusão de leads
+- API para operações CRUD
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tecnologias Utilizadas
+- Laravel (Back-End)
+- HTML, Bootstrap, CSS, JavaScript (jquery) (Front-End)
+- MySQL (Persistência de Dados)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Instruções de Configuração
+1. Clone o repositório: `git clone https://github.com/chnds/Lead-Management-System.git`
+2. Instale as dependências: `composer install`
+3. Configure o ambiente: Copie o arquivo `.env.example` para `.env` e configure o banco de dados e outras variáveis de ambiente.
+4. Execute as migrações: `php artisan migrate`
+5. Inicie o servidor: `php artisan serve`
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Como Testar a API
+Após configurar e iniciar o servidor, você pode testar a API utilizando ferramentas como Postman ou Insomnia. Aqui estão alguns pontos de entrada da API:
 
-## Learning Laravel
+**Autenticação de Usuário:**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Método: POST
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+URL: http://localhost:8000/api/login
 
-## Laravel Sponsors
+Corpo: JSON com email e senha do usuário
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Exemplo de corpo da solicitação:
 
-### Premium Partners
+json
+Copy code
+{
+    "email": "seu_email@example.com",
+    "password": "sua_senha"
+}
+Exemplo de resposta bem-sucedida:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+json
+Copy code
+{
+    "token": "seu_token_de_autenticacao"
+}
+Este token será necessário para autenticar as demais solicitações.
 
-## Contributing
+**Listar Leads:**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Método: GET
+URL: http://localhost:8000/api/leads
+Cabeçalho: Authorization: Bearer <seu_token_de_autenticacao>
 
-## Code of Conduct
+**Adicionar Lead:**
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Método: POST
 
-## Security Vulnerabilities
+URL: http://localhost:8000/api/leads
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Cabeçalho: Authorization: Bearer <seu_token_de_autenticacao>
 
-## License
+Corpo: JSON com os detalhes do lead
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Exemplo de corpo da solicitação:
+
+json
+Copy code
+{
+    "nome": "Nome do Lead",
+    "email": "lead@example.com"
+}
+
+**Editar Lead:**
+
+Método: PUT
+
+URL: http://localhost:8000/api/leads/{id}
+
+Cabeçalho: Authorization: Bearer <seu_token_de_autenticacao>
+
+Corpo: JSON com os detalhes atualizados do lead
+
+Exemplo de corpo da solicitação:
+
+json
+Copy code
+{
+    "nome": "Novo Nome do Lead",
+    "email": "novo_lead@example.com"
+}
+
+**Excluir Lead:**
+
+Método: DELETE
+URL: http://localhost:8000/api/leads/{id}
+Cabeçalho: Authorization: Bearer <seu_token_de_autenticacao>
+Certifique-se de substituir http://localhost:8000 pela URL do seu ambiente local. 
+Essas rotas requerem autenticação de usuário por meio da rota /api/login, que retorna um token de autenticação necessário para todas as demais solicitações. Certifique-se de incluir este token no cabeçalho Authorization no formato Bearer <seu_token_de_autenticacao> em todas as requisições posteriores.
+
+## Testes Unitários
+
+Os testes unitários são essenciais para garantir que diferentes partes do seu sistema funcionem conforme o esperado de forma isolada. No contexto deste projeto, os testes unitários abrangem as seguintes operações:
+
+### Testes Realizados
+
+1. **Listagem de Leads:**
+   - Garante que a listagem de leads seja correta e contenha as informações esperadas.
+
+2. **Exclusão de Leads:**
+   - Verifica se a exclusão de leads é executada corretamente, removendo os registros do sistema.
+
+3. **Edição de Leads:**
+   - Testa se a edição de leads funciona conforme esperado, atualizando corretamente as informações no banco de dados.
+
+4. **Adição de Leads:**
+   - Certifica-se de que a adição de novos leads seja bem-sucedida, inserindo registros no sistema.
+
+### Executando Testes Unitários
+
+Para executar os testes unitários do Laravel, utilize o seguinte comando:
+
+```bash
+php artisan test
+
